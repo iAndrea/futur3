@@ -1,0 +1,31 @@
+{
+  "name": "futur3test",
+  "version": "1.0.0",
+  "description": "Test Futur3",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "rootDir": "Test/",
+    "verbose": "true",
+    "start": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iAndrea/futur3.git"
+  },
+  "author": "Fadi Andrea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iAndrea/futur3/issues"
+  },
+  "homepage": "https://github.com/iAndrea/futur3#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "npm": "^6.0.0",
+    "timed-cache": "^1.1.0"
+  },
+  "devDependencies": {
+    "jest": "^21.2.1"
+  }
+}
