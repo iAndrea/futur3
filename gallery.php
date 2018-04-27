@@ -28,12 +28,16 @@
 			</div>
 
 			<?php
-				for ($x = 0; $x < $_GET['len']; $x++) {
-					echo '<div class="card card-list col-lg-6 col-md-6 col-sm-6 col-xs-6">';
-						echo '<div class="card-body">';
-							echo '<a href="#" class="card-text" id="body' . $x . '">Some quick example text to build on the card title and make up the bulk of the cards content.</a>';
+				if($_GET['len'] == 0)
+					echo '<h1>Nessun Elemento</h1>';
+				else {
+					for ($x = 0; $x < $_GET['len']; $x++) {
+						echo '<div class="card card-list col-lg-6 col-md-6 col-sm-6 col-xs-6">';
+							echo '<div class="card-body">';
+								echo '<a href="#" class="card-text" id="body' . $x . '">Some quick example text to build on the card title and make up the bulk of the cards content.</a>';
+							echo '</div>';
 						echo '</div>';
-					echo '</div>';
+					}
 				}
 			?>
 		</div>
@@ -41,14 +45,13 @@
 		<script>
 			$( document ).ready(function() {
 				$.getJSON('http://futur3test.herokuapp.com/multiGallery', function(albums) {
-					$.getJSON('http://futur3test.herokuapp.com/multiPhoto', function(photos) {
-						for(let i = 0; i < albums.length; i++) {
-							//$('#header' + i).text(albums[i].id);
+					for(let i = 0; i < albums.length; i++) {
+						$.getJSON('http://futur3test.herokuapp.com/photo?albumId=' + i, function(photos) {
 							$('#body' + i).text(albums[i].title);
-							$('#body' + i).attr('href', "photoGallery.php?id=" + albums[i].id + "&userid=" + albums[i].userId + "&len=" + photos.length);
-							//$('#footer' + i).text(albums[i].userId);
-						}
-					});
+							$('#body' + i).attr('href', "photoGallery.php?id=" + albums[i].id + "&userid=" + albums[i].userId);
+							$('#body' + i).attr('href', $('#body' + i).attr('href') + "&len=" + photos.length);
+						});
+					}
 				});
 			});
 		</script>

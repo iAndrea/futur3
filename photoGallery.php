@@ -28,20 +28,26 @@
 			</div>
 
 			<?php
-				for ($x = 0; $x < $_GET['len']; $x++) {
-					echo '<div class="card text-center card-stock col-lg-3 col-md-3 col-sm-3 col-xs-3">';
-						echo '<a href="#" id="imgFull' . $x . '"><img class="card-img-top" id="img' . $x . '" src="photoicon.png" alt="Card image cap"></a>';
-						echo '<div class="card-body">';
-							echo '<a href="#" class="card-text" id="body' . $x . '">Some quick example text to build on the card title and make up the bulk of the cards content.</a>';
+				if($_GET['len'] == 0)
+					echo '<h1>Nessun Elemento</h1>';
+				else {
+					for ($x = 0; $x < $_GET['len']; $x++) {
+						echo '<div class="card text-center card-stock col-lg-3 col-md-3 col-sm-3 col-xs-3">';
+							echo '<a href="#" id="imgFull' . $x . '"><img class="card-img-top" id="img' . $x . '" src="photoicon.png" alt="Card image cap"></a>';
+							echo '<div class="card-body">';
+								echo '<a href="#" class="card-text" id="body' . $x . '">Some quick example text to build on the card title and make up the bulk of the cards content.</a>';
+								echo '<p id="alid' . $x . '" style="display: none;">' . $_GET['id'] . '</p>';
+							echo '</div>';
 						echo '</div>';
-					echo '</div>';
+					}
 				}
 			?>
 		</div>
 
 		<script>
 			$( document ).ready(function() {
-				$.getJSON('http://futur3test.herokuapp.com/multiPhoto', function(photos) {
+				var photoId = $('#alid0').text();
+				$.getJSON('http://futur3test.herokuapp.com/photo?albumId=' + photoId, function(photos) {
 					for(let i = 0; i < photos.length; i++) {
 						$('#img' + i).attr('src', photos[i].thumbnailUrl);
 						$('#imgFull' + i).attr('href', "photo.php?url=" + photos[i].url + "&title=" + photos[i].title);

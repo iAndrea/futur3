@@ -39,8 +39,8 @@ exports.getMultiPhoto = function(req, resp) {
 
 exports.getPhoto = function(req, resp) {
 	return new Promise((resolve, reject) => {
-		var PhotoId = req.query.id
-	    var photo = cache.get("photo" + PhotoId);
+		var albumId = req.query.albumId
+	    var photo = cache.get("photo" + albumId);
 
 		resp.writeHead(200, {"Content-Type": "application/json"});
 
@@ -48,7 +48,7 @@ exports.getPhoto = function(req, resp) {
 			resp.end(JSON.stringify(photo));
 			return resolve("OK");
 		} else {
-			http.get('http://jsonplaceholder.typicode.com/photos?id=' + PhotoId, function(res) {
+			http.get('http://jsonplaceholder.typicode.com/photos?albumId=' + albumId, function(res) {
 				//console.log('STATUS: ' + res.statusCode);
 				//console.log('HEADERS: ' + JSON.stringify(res.headers));
 
@@ -58,7 +58,7 @@ exports.getPhoto = function(req, resp) {
 				res.on('end', () => {
 					try {
 						const parsedData = JSON.parse(rawData);
-						cache.put('photo' + PhotoId, parsedData)
+						cache.put('photo' + albumId, parsedData)
 						//console.log(parsedData);
 						resp.end(rawData);
 						return resolve("OK");
