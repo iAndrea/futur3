@@ -33,8 +33,10 @@
 		</div>
 
 		<script>
-			$.get('https://jsonplaceholder.typicode.com/albums', function(data) {
-				document.getElementById('redirect').setAttribute('href', "gallery.php?len=" + data.length);
+			$( document ).ready(function() {
+				$.getJSON('http://futur3test.herokuapp.com/multiGallery', function(data) {
+					document.getElementById('redirect').setAttribute('href', "gallery.php?len=" + data.length);
+				});
 			});
 		</script>
 	</body>

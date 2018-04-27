@@ -40,16 +40,17 @@
 		</div>
 
 		<script>
-			$.get('futur3test.herokuapp.com/multiPhotos', function(photos) {
-				photos = JSON.parse(photos);
-				for(let i = 0; i < photos.length; i++) {
-					$('#img' + i).attr('src', photos[i].thumbnailUrl);
-					$('#imgFull' + i).attr('href', "photo.php?url=" + photos[i].url + "&title=" + photos[i].title);
-					if((photos[i].title).length > 18)
-						$('#body' + i).text((photos[i].title).substring(0, 17) + "...");
-					else
-						$('#body' + i).text(photos[i].title);
-				}
+			$( document ).ready(function() {
+				$.getJSON('http://futur3test.herokuapp.com/multiPhoto', function(photos) {
+					for(let i = 0; i < photos.length; i++) {
+						$('#img' + i).attr('src', photos[i].thumbnailUrl);
+						$('#imgFull' + i).attr('href', "photo.php?url=" + photos[i].url + "&title=" + photos[i].title);
+						if((photos[i].title).length > 18)
+							$('#body' + i).text((photos[i].title).substring(0, 17) + "...");
+						else
+							$('#body' + i).text(photos[i].title);
+					}
+				});
 			});
 		</script>
 	</body>

@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-var routes = require('./api/routes/Routes');
+var routes = require('./Routes');
 
 routes(app); //register the route
 

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(app) {
-	const gl = require('../controllers/albums');
-	const ph = require ('../controllers/photos');
+	const gl = require('./albums');
+	const ph = require ('./photos');
 
 	app.route('/multiGallery')
 		.get(gl.getMultiGallery);
@@ -14,4 +14,8 @@ module.exports = function(app) {
 
 	app.route('/photo')
 		.get(ph.getPhoto);
+
+	app.route('/cache')
+		.delete(ph.delCache)
+		.delete(gl.delCache)
 };

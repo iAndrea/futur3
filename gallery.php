@@ -39,16 +39,16 @@
 		</div>
 
 		<script>
-			$.get('futur3test.herokuapp.com/multiGallery', function(albums) {
-				albums = JSON.parse(albums);
-				$.get('futur3test.herokuapp.com/multiPhotos', function(photos) {
-					photos = JSON.parse(photos);
-					for(let i = 0; i < albums.length; i++) {
-						//$('#header' + i).text(albums[i].id);
-						$('#body' + i).text(albums[i].title);
-						$('#body' + i).attr('href', "photoGallery.php?id=" + albums[i].id + "&userid=" + albums[i].userId + "&len=" + photos.length);
-						//$('#footer' + i).text(albums[i].userId);
-					}
+			$( document ).ready(function() {
+				$.getJSON('http://futur3test.herokuapp.com/multiGallery', function(albums) {
+					$.getJSON('http://futur3test.herokuapp.com/multiPhoto', function(photos) {
+						for(let i = 0; i < albums.length; i++) {
+							//$('#header' + i).text(albums[i].id);
+							$('#body' + i).text(albums[i].title);
+							$('#body' + i).attr('href', "photoGallery.php?id=" + albums[i].id + "&userid=" + albums[i].userId + "&len=" + photos.length);
+							//$('#footer' + i).text(albums[i].userId);
+						}
+					});
 				});
 			});
 		</script>
